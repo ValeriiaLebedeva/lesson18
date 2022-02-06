@@ -79,7 +79,7 @@ public class AddToCartUsingCookieTest {
                         .body("message", is("The product has been added to your <a href=\"/cart\">shopping cart</a>"))
                         .body("updatetopcartsectionhtml", is("(" + (getItemsCountFromCart(cartItemNumber) + 1) + ")"))
                         .extract().response();
-        System.out.println("Response = " + response.asString());
+        System.out.println("Response = " + response.path("updatetopcartsectionhtml"));
         System.out.println(cartItemNumber);
 
     }
