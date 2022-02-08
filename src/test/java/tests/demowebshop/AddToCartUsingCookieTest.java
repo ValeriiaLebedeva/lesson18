@@ -13,6 +13,7 @@ import org.openqa.selenium.Cookie;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class AddToCartUsingCookieTest {
@@ -79,8 +80,7 @@ public class AddToCartUsingCookieTest {
                         .body("message", is("The product has been added to your <a href=\"/cart\">shopping cart</a>"))
                         .body("updatetopcartsectionhtml", is("(" + (getItemsCountFromCart(cartItemNumber) + 1) + ")"))
                         .extract().response();
-        System.out.println("Response = " + response.path("updatetopcartsectionhtml"));
-        System.out.println(cartItemNumber);
+        assertThat((String) response.path("updatetopcartsectionhtml")).isEqualTo("(" + (getItemsCountFromCart(cartItemNumber) + 1) + ")");
 
     }
 }
